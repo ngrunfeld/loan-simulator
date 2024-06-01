@@ -1,0 +1,41 @@
+<h2>Loan Simulator</h2>
+
+<form [formGroup]="simulador" (keyup.enter)="recalculate()">
+  <div>
+    <label for="ammount" >Loan Principal</label>
+    <label for="interest">Montly Interest</label>
+    <label for="firstPayment">First Payment</label>
+    <label for="montlyPayment">Montly Payment</label>
+  </div>
+  <div>
+    <input formControlName="ammount" class=""/>
+    <input formControlName="interest"/>
+    <input formControlName="firstPayment"/>
+    <input formControlName="montlyPayment"/>
+  </div>
+</form>
+
+<ng-container *ngIf="cuotas">
+  <div class="flex data">
+    <table class="table" id="schema">
+      <tr>
+        <th>Installment</th>
+        <th>Balance</th>
+        <th>Rate</th>
+        <th>Total</th>
+
+      </tr>
+      <tr *ngFor="let cuota of cuotas; index as i">
+        <td>{{ i+1 }}</td>
+        <td>{{ cuota.saldo | currency }}</td>
+        <td>{{ cuota.tasa | currency }}</td>
+        <td>{{ cuota.accrued | currency }}</td>
+      </tr>
+    </table>
+    <div class="">
+      <button (click)="exportXLS()" class="btn btn-primary">xls</button>
+    </div>
+  </div>
+</ng-container>
+
+

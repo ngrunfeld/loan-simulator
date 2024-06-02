@@ -16,25 +16,33 @@
 </form>
 
 <ng-container *ngIf="cuotas">
-  <div class="flex data">
-    <table class="table" id="schema">
-      <tr>
-        <th>Installment</th>
-        <th>Balance</th>
-        <th>Rate</th>
-        <th>Total</th>
+  <div class="">
+    <table class="table w-50" id="schema">
+      <thead>
+        <tr>
+          <th class="col-2">Installment</th>
+          <th class="col-md-2">Balance</th>
+          <th class="col-md-2">Rate</th>
+          <th class="col-md-2">Total</th>
+        </tr>
+      </thead>
 
-      </tr>
-      <tr *ngFor="let cuota of cuotas; index as i">
-        <td>{{ i+1 }}</td>
-        <td>{{ cuota.saldo | currency }}</td>
-        <td>{{ cuota.tasa | currency }}</td>
-        <td>{{ cuota.accrued | currency }}</td>
-      </tr>
+      <tbody>
+        <tr *ngFor="let cuota of cuotas; index as i">
+          <td class="col-2">{{ i+1 }}</td>
+          <td class="col-md-2">{{ cuota.saldo | currency }}</td>
+          <td class="col-md-2">{{ cuota.tasa | currency }}</td>
+          <td class="col-md-2">{{ cuota.accrued | currency }}</td>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="3" class="bg-light">TEA: {{ tea | currency }} ({{ teaper | percent }})</td>
+          <td class="bg-light"><button (click)="exportXLS()" class="btn btn-primary">xls</button></td>
+       </tr>
+      </tfoot>
     </table>
-    <div class="">
-      <button (click)="exportXLS()" class="btn btn-primary">xls</button>
-    </div>
   </div>
 </ng-container>
 

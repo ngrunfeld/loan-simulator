@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   public cuotas: Array<any> = [];
+  public tea = 0;
+  public teaper = 0;
+  
   public simulador = this.formBuilder.group({
     ammount: [10000, Validators.required],
     interest: [1.0, Validators.required],
@@ -33,8 +36,9 @@ export class AppComponent implements OnInit {
     const preMonths = Number(this.simulador.get('firstPayment')?.value);
     const interest = Number(this.simulador.get('interest')?.value);
     const montlyPayment = Number(this.simulador.get('montlyPayment')?.value);
+    const amount = Number(this.simulador.get('ammount')?.value)
 
-    let saldo = Number(this.simulador.get('ammount')?.value);
+    let saldo = amount;
     let accrued = 0;
     let payment = 0;
     let tasa = 0;
@@ -59,6 +63,8 @@ export class AppComponent implements OnInit {
         tasa: tasa
       });
     }
+    this.tea = accrued - amount;
+    this.teaper = this.tea / amount;
   }
 
   exportXLS(): void {
